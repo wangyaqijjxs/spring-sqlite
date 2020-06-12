@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+
+  <bean id="SQLitePoolDataSource" class="org.sqlite.javax.SQLiteConnectionPoolDataSource">
+    <property name="url" value="jdbc:sqlite:D:\sqlite.db"></property>
+    <property name="databaseName" value="sqlite"></property>
+  </bean>
+
+  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource">
+      <ref bean="SQLitePoolDataSource"/>
+    </property>
+  </bean>
+
+  <!--初始化userDao-->
+  <bean id="userDao" class="dao.UserDao">
+    <property  name="jdbcTemplate" ref="jdbcTemplate"/>
+  </bean>
+
+  <!--初始化CompanyDao-->
+  <bean id="companyDao" class="dao.CompanyDao">
+    <property  name="jdbcTemplate" ref="jdbcTemplate"/>
+  </bean>
+
+  <!--初始化AddressDao-->
+  <bean id="addressDao" class="dao.AddressDao">
+    <property  name="jdbcTemplate" ref="jdbcTemplate"/>
+  </bean>
+
+  <!--初始化UserService-->
+  <bean id="userService" class="service.UserService">
+    <constructor-arg index="0" ref="userDao"></constructor-arg>
+    <constructor-arg index="1" ref="companyDao"></constructor-arg>
+    <constructor-arg index="2" ref="addressDao"></constructor-arg>
+  </bean>
+
+
+
+
+
+</beans>
+
+
