@@ -17,17 +17,17 @@
   </bean>
 
   <!--初始化userDao-->
-  <bean id="userDao" class="dao.UserDao">
+  <bean id="userDao" class="dao.impl.UserDaoImpl">
     <property  name="jdbcTemplate" ref="jdbcTemplate"/>
   </bean>
 
   <!--初始化CompanyDao-->
-  <bean id="companyDao" class="dao.CompanyDao">
+  <bean id="companyDao" class="dao.impl.CompanyDaoImpl">
     <property  name="jdbcTemplate" ref="jdbcTemplate"/>
   </bean>
 
   <!--初始化AddressDao-->
-  <bean id="addressDao" class="dao.AddressDao">
+  <bean id="addressDao" class="dao.impl.AddressDaoImpl">
     <property  name="jdbcTemplate" ref="jdbcTemplate"/>
   </bean>
 
